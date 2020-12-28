@@ -1,9 +1,29 @@
 {
   "name": "vue3-draggable",
+  "description": "Draggable component for vue 3.x, using HTML Drag&Drop API",
   "version": "1.0.0",
+  "private": false,
+  "author": {
+    "name": "Kyle Kim",
+    "email": "kyle.hwan.k@gmail.com"
+  },
+  "repository": "https://github.com/shkilo/vue3-draggable",
+  "bugs": "https://github.com/shkilo/vue3-draggable/issues",
+  "keywords": [
+    "draggable",
+    "vue3",
+    "drag",
+    "drop"
+  ],
+  "license": "MIT",
+  "main": "./dist/vue3-draggable.common.js",
+  "files": [
+    "dist/*"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build-library": "vue-cli-service build --target lib --name vue3-draggable ./src/install.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
