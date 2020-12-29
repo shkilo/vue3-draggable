@@ -1,7 +1,7 @@
 {
   "name": "vue3-draggable",
-  "description": "Draggable component for vue 3.x, using HTML Drag&Drop API",
-  "version": "1.0.0",
+  "description": "Draggable component for vue 3.x, with no dependencies",
+  "version": "1.0.1",
   "private": false,
   "author": {
     "name": "Kyle Kim",
@@ -12,8 +12,10 @@
   "keywords": [
     "draggable",
     "vue3",
+    "vue",
     "drag",
-    "drop"
+    "drop",
+    "drag and drop"
   ],
   "license": "MIT",
   "main": "./dist/vue3-draggable.common.js",
@@ -28,7 +30,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "vue": "^3.0.0"
+    "vue": "^3.0.0",
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
