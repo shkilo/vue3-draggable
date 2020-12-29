@@ -18,7 +18,7 @@
     "drag and drop"
   ],
   "license": "MIT",
-  "main": "./dist/vue3-draggable.common.js",
+  "main": "dist/vue3-draggable.common.js",
   "files": [
     "dist/*"
   ],
