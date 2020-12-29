@@ -1,49 +1,51 @@
 <template>
   <div 
-    draggable="true" 
-    @transitionStart="transitionStart"
-    @transitionEnd="transitionEnd"
-    @dragover.prevent="itemDragOver"
-    @dragstart="itemDragStart" 
-    @dragend="itemDragEnd"
-    @dragleave.prevent
-    ref="draggable" 
-    :class="{ isDragging }"
-    
-  >
-    <slot></slot>
+    @dragover.prevent="containerDragOver"
+  >   
+    <draggable-item
+      v-for="(item, index) in localItems" 
+      :key="item.id" 
+      :item="item" 
+      :dropZoneId="dropZoneId"
+      :position="index"
+      @itemDragOver="onItemDragOver"
+    > 
+      <slot name="item" :item="item"></slot>
+    </draggable-item> 
   </div>
 </template>
 
 <script>
-import {toRefs} from 'vue'
-import { useDraggable } from "../composables/dragDrop";
+import { toRefs } from "vue";
+import DraggableItem from './DraggableItem';
+import { useDraggableContainer } from '../composables/draggable';
 
 export default {
   name: "Draggable",
+  components: {
+    DraggableItem
+  },
   props: {
-    item: Object,
-    position: Number,
+    modelValue: Array,
     dropZoneId: String,
   },
   setup(props, context) {
-    const { item, position, dropZoneId } = toRefs(props)
-    const { 
-      isDragging,
-      itemDragStart,
-    itemDragOver,
-    itemDragEnd, transitionStart, transitionEnd, draggable } = useDraggable({item, position, dropZoneId}, context);
+    const { modelValue, dropZoneId } = toRefs(props);
     
-    return { isDragging,
-    itemDragStart,
-    itemDragOver,
-    itemDragEnd, transitionStart, transitionEnd, draggable}
+    const { localItems, onItemDragOver, containerDragOver } = useDraggableContainer(
+      { 
+        initialItems: modelValue, 
+        dropZoneId,
+      }, 
+      context
+    );
+    return { localItems, onItemDragOver, containerDragOver }
   }
 }
 </script>
 
 <style scoped>
-.isDragging {
-  opacity: 0.4
+.item-list-move {
+  transition: transform 200ms;
 }
 </style>

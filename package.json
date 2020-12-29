@@ -1,6 +1,6 @@
 {
   "name": "vue3-draggable",
-  "description": "Draggable component for vue 3.x, with no dependencies",
+  "description": "simple drag&drop component for vue 3.x",
   "version": "1.0.5",
   "private": false,
   "author": {
@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "vue": "^3.0.0"
+    "vue": "^3.0.0",
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

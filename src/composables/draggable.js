@@ -11,7 +11,7 @@ const removeAndInsertDragging = (items, position) => {
   return newItems;
 };
 
-const useDroppable = ({ initialItems, dropZoneId }, context) => {
+const useDraggableContainer = ({ initialItems, dropZoneId }, context) => {
   const items = ref(initialItems.value);
 
   const onItemDragOver = ({ position }) => {
@@ -48,7 +48,7 @@ const useDroppable = ({ initialItems, dropZoneId }, context) => {
   };
 };
 
-const useDraggable = ({ item, position, dropZoneId }, context) => {
+const useDraggableItem = ({ item, position, dropZoneId }, context) => {
   const draggable = ref(null);
   const isDragging = ref(item.value.id === dragging.value.id ? true : false);
   const middleY = ref(null);
@@ -115,4 +115,4 @@ const useDraggable = ({ item, position, dropZoneId }, context) => {
   };
 };
 
-export { useDroppable, useDraggable };
+export { useDraggableContainer, useDraggableItem };

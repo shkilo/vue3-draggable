@@ -1,61 +1,41 @@
 <template>
   <div class="container">
-    <droppable v-model="items" dropZoneId="1" class="drop-zone" >
+    <draggable v-model="items1" dropZoneId="1" class="drop-zone" >
       <template v-slot:item="{item}">
         <div class="draggable-item">
           {{item.title}}
         </div>
         
       </template>
-    </droppable>
-    {{items}}
+    </draggable>
+    <pre></pre>
+    {{items1}}
 
-    <droppable v-model="items2" dropZoneId="2" class="drop-zone">
+    <draggable v-model="items2" dropZoneId="2" class="drop-zone">
       <template v-slot:item="{item}">
         <div class="draggable-item">
           {{item.title}}
         </div>
       </template>
-    </droppable>
+    </draggable>
     {{items2}}
   </div>
 </template>
 
 <script>
-import Droppable from './components/Droppable'
+import Draggable from './components/Draggable'
 
 export default {
   name: 'App',
   components: {
-    Droppable
+    Draggable
   },
   data() {
     return {
-      items: [
-      {
-        id: 1,
-        title: 'item 1'
-      },
-      {
-        id: 2,
-        title: 'item 2'
-      },
-      {
-        id: 3,
-        title: 'item 3'
-      },
-      {
-        id: 4,
-        title: 'item 4'
-      },
-      {
-        id: 5,
-        title: 'item 5'
-      }
-      ],
+      items1: Array(5).fill({}).map((_, index) => ({id: index+1, title: `Item ${index+1}`})),
       items2: [],
     }
-  }
+  },
 }
 </script>
 
@@ -69,7 +49,7 @@ export default {
   margin-top: 60px;
 }
 .container {
-  width: 800px;
+  width: 1000px;
 }
 body {
   display: flex;
@@ -77,8 +57,9 @@ body {
   justify-content: center;
 }
 .draggable-item {
+  color: darkslategray;
   background-color: lightblue;
-  border: 1px solid lightblue;
+  box-shadow: 0px 2px 5px #aaa;
   margin: 1%;
   padding: 1%;
   display: flex;
@@ -87,7 +68,7 @@ body {
 .drop-zone {
   display: flex;
   flex-direction: column;
-  border: 1px solid gray;
+  box-shadow: 0px 3px 5px #aaa;
   margin: 30px;
   padding: 5px;
   min-height: 100px;
