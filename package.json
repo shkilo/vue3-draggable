@@ -1,7 +1,7 @@
 {
   "name": "vue3-draggable",
   "description": "Draggable component for vue 3.x, with no dependencies",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": false,
   "author": {
     "name": "Kyle Kim",
