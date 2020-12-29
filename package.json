@@ -20,9 +20,7 @@
   "license": "MIT",
   "main": "dist/vue3-draggable.common.js",
   "files": [
-    "dist/*",
-    "src/*",
-    "*.json"
+    "dist/*"
   ],
   "scripts": {
     "serve": "vue-cli-service serve",
