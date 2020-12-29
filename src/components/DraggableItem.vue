@@ -9,7 +9,6 @@
     @dragleave.prevent
     ref="draggable" 
     :class="{ isDragging }"
-    
   >
     <slot></slot>
   </div>
@@ -31,13 +30,22 @@ export default {
     const { 
       isDragging,
       itemDragStart,
-    itemDragOver,
-    itemDragEnd, transitionStart, transitionEnd, draggable } = useDraggableItem({item, position, dropZoneId}, context);
+      itemDragOver,
+      itemDragEnd, 
+      transitionStart, 
+      transitionEnd, 
+      draggable 
+    } = useDraggableItem({item, position, dropZoneId}, context);
     
-    return { isDragging,
-    itemDragStart,
-    itemDragOver,
-    itemDragEnd, transitionStart, transitionEnd, draggable}
+    return { 
+      isDragging,
+      itemDragStart,
+      itemDragOver,
+      itemDragEnd, 
+      transitionStart, 
+      transitionEnd, 
+      draggable
+    }
   }
 }
 </script>
