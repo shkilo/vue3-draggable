@@ -28,8 +28,7 @@
     "build-library": "vue-cli-service build --target lib --name vue3-draggable ./src/index.js",
     "lint": "vue-cli-service lint"
   },
-  "dependencies": {
-    "core-js": "^3.6.5",
+  "peerDependencies": {
     "vue": "^3.0.0"
   },
   "devDependencies": {
@@ -38,8 +37,10 @@
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
     "babel-eslint": "^10.1.0",
+    "core-js": "^3.6.5",
     "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^7.0.0-0"
+    "eslint-plugin-vue": "^7.0.0-0",
+    "vue": "^3.0.0"
   },
   "eslintConfig": {
     "root": true,

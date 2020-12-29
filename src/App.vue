@@ -5,10 +5,8 @@
         <div class="draggable-item">
           {{item.title}}
         </div>
-        
       </template>
     </draggable>
-    <pre></pre>
     {{items1}}
 
     <draggable v-model="items2" dropZoneId="2" class="drop-zone">
