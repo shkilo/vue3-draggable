@@ -1,5 +1,5 @@
 {
-  "name": "vue3-draggable2",
+  "name": "vue3-draggable",
   "description": "Draggable component for vue 3.x, with no dependencies",
   "version": "1.0.3",
   "private": false,

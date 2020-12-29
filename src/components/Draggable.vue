@@ -20,6 +20,7 @@ import {toRefs} from 'vue'
 import { useDraggable } from "../composables/dragDrop";
 
 export default {
+  name: "Draggable",
   props: {
     item: Object,
     position: Number,

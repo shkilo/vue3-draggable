@@ -21,6 +21,7 @@ import Draggable from './Draggable';
 import { useDroppable } from '../composables/dragDrop';
 
 export default {
+  name: "Droppable",
   components: {
     Draggable
   },
