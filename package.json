@@ -20,12 +20,14 @@
   "license": "MIT",
   "main": "dist/vue3-draggable.common.js",
   "files": [
-    "dist/*"
+    "dist/*",
+    "src/*",
+    "*.json"
   ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build-library": "vue-cli-service build --target lib --name vue3-draggable ./src/install.js",
+    "build-library": "vue-cli-service build --target lib --name vue3-draggable ./src/index.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
