@@ -5,10 +5,12 @@ simple drag&drop component for vue 3.x, with no dependencies
 ![vue3-drag](https://user-images.githubusercontent.com/59331444/103271751-6e8a2480-49fe-11eb-953d-9554e0af513a.gif)
 
 # Features
-+ support v-model
-+ customizable draggable component
+
+- support v-model
+- customizable draggable component
 
 # Installation
+
 ```
 npm i vue3-draggable
 ```
@@ -16,17 +18,19 @@ npm i vue3-draggable
 # Usage
 
 import component:
+
 ```javascript
-import Draggable from './components/Draggable'
+import Draggable from 'vue3-draggable';
 
 export default {
   components: {
-    Draggable
+    Draggable,
   },
-}
+};
 ```
 
 template:
+
 ```
 <draggable v-model="items" dropZoneId="1" class="drop-zone" >
     <template v-slot:item="{item}">
@@ -41,8 +45,7 @@ template:
 
 ### Props
 
-modelValue
-
-dropZoneId
-
-
+| Name       | Required     | Type       | Description                                        |
+| :--------- | :----------- | :--------- | :------------------------------------------------- |
+| modelValue | **REQUIRED** | **ARRAY**  | v-model value, items to be bound                   |
+| dropZoneId | **REQUIRED** | **STRING** | unique id is required for each draggable component |
