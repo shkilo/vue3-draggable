@@ -1,9 +1,7 @@
 import Droppable from './components/Droppable';
-import Draggable from './components/Draggable';
 
 const Drag = {
   install(Vue) {
-    Vue.component('draggable', Draggable);
     Vue.component('droppable', Droppable);
   },
 };
