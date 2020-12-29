@@ -1,7 +1,7 @@
 {
   "name": "vue3-draggable",
   "description": "simple drag&drop component for vue 3.x",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "private": false,
   "author": {
     "name": "Kyle Kim",
