@@ -32,7 +32,7 @@ export default {
 template:
 
 ```vue
-<draggable v-model="items" dropZoneId="1" class="drop-zone" >
+<draggable v-model="items" dropZoneId="1" class="drop-zone">
     <template v-slot:item="{item}">
         <!-- example -->
         <div class="draggable-item">
