@@ -32,7 +32,7 @@ export default {
 template:
 
 ```vue
-<draggable v-model="items" dropZoneId="1" class="drop-zone" >
+<draggable v-model="items" dropZoneId="1" class="drop-zone">
     <template v-slot:item="{item}">
         <!-- example -->
         <div class="draggable-item">
@@ -47,5 +47,5 @@ template:
 
 | Name       | Required     | Type       | Description                                        |
 | :--------- | :----------- | :--------- | :------------------------------------------------- |
-| modelValue | **REQUIRED** | **ARRAY**  | v-model value, items to be bound                   |
-| dropZoneId | **REQUIRED** | **STRING** | unique id is required for each draggable component |
+| modelValue | REQUIRED | ARRAY  | v-model value, items to be bound <br> **each item in array should have 'id' property** <br> ex) [{id:1, title:item1}, {id:2, title: item2}]            |
+| dropZoneId | REQUIRED | STRING | unique id is required for each draggable component |
