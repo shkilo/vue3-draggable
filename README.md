@@ -47,5 +47,5 @@ template:
 
 | Name       | Required     | Type       | Description                                        |
 | :--------- | :----------- | :--------- | :------------------------------------------------- |
-| modelValue | **REQUIRED** | **ARRAY**  | v-model value, items to be bound                   |
-| dropZoneId | **REQUIRED** | **STRING** | unique id is required for each draggable component |
+| modelValue | REQUIRED | ARRAY  | v-model value, items to be bound <br> **each array item should have 'id' property** <br> ex) [{id:1, title:item1}, {id:2, title: item2}]            |
+| dropZoneId | REQUIRED | STRING | unique id is required for each draggable component |
