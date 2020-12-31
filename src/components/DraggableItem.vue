@@ -1,13 +1,13 @@
 <template>
-  <div 
-    draggable="true" 
+  <div
+    draggable="true"
     @transitionStart="transitionStart"
     @transitionEnd="transitionEnd"
     @dragover.prevent="itemDragOver"
-    @dragstart="itemDragStart" 
+    @dragstart="itemDragStart"
     @dragend="itemDragEnd"
     @dragleave.prevent
-    ref="draggable" 
+    ref="draggable"
     :class="{ isDragging }"
   >
     <slot></slot>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import {toRefs} from 'vue'
+import { toRefs } from "vue";
 import { useDraggableItem } from "../composables/draggable";
 
 export default {
@@ -23,35 +23,35 @@ export default {
   props: {
     item: Object,
     position: Number,
-    dropZoneId: String,
+    dropZoneId: String
   },
   setup(props, context) {
-    const { item, position, dropZoneId } = toRefs(props)
-    const { 
+    const { item, position, dropZoneId } = toRefs(props);
+    const {
       isDragging,
       itemDragStart,
       itemDragOver,
-      itemDragEnd, 
-      transitionStart, 
-      transitionEnd, 
-      draggable 
-    } = useDraggableItem({item, position, dropZoneId}, context);
-    
-    return { 
-      isDragging,
-      itemDragStart,
-      itemDragOver,
-      itemDragEnd, 
-      transitionStart, 
-      transitionEnd, 
+      itemDragEnd,
+      transitionStart,
+      transitionEnd,
       draggable
-    }
+    } = useDraggableItem({ item, position, dropZoneId }, context);
+
+    return {
+      isDragging,
+      itemDragStart,
+      itemDragOver,
+      itemDragEnd,
+      transitionStart,
+      transitionEnd,
+      draggable
+    };
   }
-}
+};
 </script>
 
 <style scoped>
 .isDragging {
-  opacity: 0.4
+  opacity: 0.4;
 }
 </style>

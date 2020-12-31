@@ -1,24 +1,22 @@
 <template>
-  <div 
-    @dragover.prevent="containerDragOver"
-  >   
+  <div @dragover.prevent="containerDragOver">
     <draggable-item
-      v-for="(item, index) in localItems" 
-      :key="item.id" 
-      :item="item" 
+      v-for="(item, index) in localItems"
+      :key="item.id"
+      :item="item"
       :dropZoneId="dropZoneId"
       :position="index"
       @itemDragOver="onItemDragOver"
-    > 
+    >
       <slot name="item" :item="item"></slot>
-    </draggable-item> 
+    </draggable-item>
   </div>
 </template>
 
 <script>
 import { toRefs } from "vue";
-import DraggableItem from './DraggableItem';
-import { useDraggableContainer } from '../composables/draggable';
+import DraggableItem from "./DraggableItem";
+import { useDraggableContainer } from "../composables/draggable";
 
 export default {
   name: "Draggable",
@@ -27,21 +25,25 @@ export default {
   },
   props: {
     modelValue: Array,
-    dropZoneId: String,
+    dropZoneId: String
   },
   setup(props, context) {
     const { modelValue, dropZoneId } = toRefs(props);
-    
-    const { localItems, onItemDragOver, containerDragOver } = useDraggableContainer(
-      { 
-        initialItems: modelValue, 
-        dropZoneId,
-      }, 
+
+    const {
+      localItems,
+      onItemDragOver,
+      containerDragOver
+    } = useDraggableContainer(
+      {
+        initialItems: modelValue,
+        dropZoneId
+      },
       context
     );
-    return { localItems, onItemDragOver, containerDragOver }
+    return { localItems, onItemDragOver, containerDragOver };
   }
-}
+};
 </script>
 
 <style scoped>

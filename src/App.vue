@@ -1,40 +1,42 @@
 <template>
   <div class="container">
-    <draggable v-model="items1" dropZoneId="1" class="drop-zone" >
-      <template v-slot:item="{item}">
+    <draggable v-model="items1" dropZoneId="1" class="drop-zone">
+      <template v-slot:item="{ item }">
         <div class="draggable-item">
-          {{item.title}}
+          {{ item.title }}
         </div>
       </template>
     </draggable>
-    {{items1}}
+    {{ items1 }}
 
     <draggable v-model="items2" dropZoneId="2" class="drop-zone">
-      <template v-slot:item="{item}">
+      <template v-slot:item="{ item }">
         <div class="draggable-item">
-          {{item.title}}
+          {{ item.title }}
         </div>
       </template>
     </draggable>
-    {{items2}}
+    {{ items2 }}
   </div>
 </template>
 
 <script>
-import Draggable from './components/Draggable'
+import Draggable from "./components/Draggable";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Draggable
   },
   data() {
     return {
-      items1: Array(5).fill({}).map((_, index) => ({id: index+1, title: `Item ${index+1}`})),
-      items2: [],
-    }
-  },
-}
+      items1: Array(5)
+        .fill({})
+        .map((_, index) => ({ id: index + 1, title: `Item ${index + 1}` })),
+      items2: []
+    };
+  }
+};
 </script>
 
 <style>

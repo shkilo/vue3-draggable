@@ -1,13 +1,61 @@
 {
   "name": "vue3-draggable",
-  "description": "simple drag&drop component for vue 3.x",
   "version": "1.0.10",
   "private": false,
+  "description": "simple drag&drop component for vue 3.x",
   "author": {
     "name": "Kyle Kim",
     "email": "kyle.hwan.k@gmail.com"
   },
-  "repository": "https://github.com/shkilo/vue3-draggable",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "build-library": "vue-cli-service build --target lib --name vue3-draggable ./src/index.js"
+  },
+  "main": "dist/vue3-draggable.common.js",
+  "files": [
+    "dist/*"
+  ],
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.0.0",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "babel-eslint": "^10.1.0",
+    "core-js": "^3.6.5",
+    "eslint": "^6.7.2",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-vue": "^7.0.0-0",
+    "prettier": "^1.19.1",
+    "vue": "^3.0.0"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended",
+      "@vue/prettier"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {
+      "prettier/prettier": ["error", {"endOfLine": "auto"}]
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
   "bugs": "https://github.com/shkilo/vue3-draggable/issues",
   "keywords": [
     "draggable",
@@ -18,47 +66,5 @@
     "drag and drop"
   ],
   "license": "MIT",
-  "main": "dist/vue3-draggable.common.js",
-  "files": [
-    "dist/*"
-  ],
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "build-library": "vue-cli-service build --target lib --name vue3-draggable ./src/index.js",
-    "lint": "vue-cli-service lint"
-  },
-  "peerDependencies": {
-    "vue": "^3.0.0"
-  },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.0.0",
-    "babel-eslint": "^10.1.0",
-    "core-js": "^3.6.5",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^7.0.0-0",
-    "vue": "^3.0.0"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+  "repository": "https://github.com/shkilo/vue3-draggable"
 }

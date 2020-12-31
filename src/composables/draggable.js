@@ -1,10 +1,10 @@
-import { ref, onMounted, onUpdated, watch } from 'vue';
+import { ref, onMounted, onUpdated, watch } from "vue";
 
 let dragging = ref({});
 let currentDropZoneId = ref(null);
 
 const removeAndInsertDragging = (items, position) => {
-  const newItems = items.filter((item) => {
+  const newItems = items.filter(item => {
     return item.id !== dragging.value.id;
   });
   newItems.splice(position, 0, { ...dragging.value });
@@ -30,7 +30,7 @@ const useDraggableContainer = ({ initialItems, dropZoneId }, context) => {
     if (currentDropZoneId.value === dropZoneId.value) {
       return;
     }
-    items.value = items.value.filter((item) => item.id !== dragging.value.id);
+    items.value = items.value.filter(item => item.id !== dragging.value.id);
   });
 
   // update model when dropped
@@ -38,13 +38,13 @@ const useDraggableContainer = ({ initialItems, dropZoneId }, context) => {
     if (dragging.value.id) {
       return;
     }
-    context.emit('update:modelValue', items.value);
+    context.emit("update:modelValue", items.value);
   });
 
   return {
     localItems: items,
     onItemDragOver,
-    containerDragOver,
+    containerDragOver
   };
 };
 
@@ -77,15 +77,15 @@ const useDraggableItem = ({ item, position, dropZoneId }, context) => {
     dragging.value = {};
   };
 
-  const itemDragOver = (e) => {
+  const itemDragOver = e => {
     if (transitioning || item.value.id === dragging.value.id) {
       return;
     }
 
     const offset = middleY.value - e.clientY;
 
-    context.emit('itemDragOver', {
-      position: offset > 0 ? position.value : position.value + 1,
+    context.emit("itemDragOver", {
+      position: offset > 0 ? position.value : position.value + 1
     });
   };
 
@@ -111,7 +111,7 @@ const useDraggableItem = ({ item, position, dropZoneId }, context) => {
     transitionStart,
     transitionEnd,
     draggable,
-    isDragging,
+    isDragging
   };
 };
 
