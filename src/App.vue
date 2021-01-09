@@ -1,28 +1,43 @@
 <template>
   <div class="container">
-    <draggable v-model="items1" dropZoneId="1" class="drop-zone">
-      <template v-slot:item="{ item }">
-        <div class="draggable-item">
-          {{ item.title }}
-        </div>
-      </template>
-    </draggable>
-    {{ items1 }}
+    <div class="left">
+      <draggable
+        v-model="items1"
+        dropZoneId="1"
+        transition="100"
+        class="drop-zone"
+      >
+        <template v-slot:item="{ item }">
+          <div class="draggable-item">
+            {{ item.title }}
+          </div>
+        </template>
+      </draggable>
 
-    <draggable v-model="items2" dropZoneId="2" class="drop-zone">
-      <template v-slot:item="{ item }">
-        <div class="draggable-item">
-          {{ item.title }}
-        </div>
-      </template>
-    </draggable>
-    {{ items2 }}
+      <pre>{{ JSON.stringify(items1, undefined, 4) }}</pre>
+    </div>
+
+    <div class="right">
+      <draggable
+        v-model="items2"
+        dropZoneId="2"
+        transition="100"
+        class="drop-zone"
+      >
+        <template v-slot:item="{ item }">
+          <div class="draggable-item">
+            {{ item.title }}
+          </div>
+        </template>
+      </draggable>
+
+      <pre>{{ JSON.stringify(items2, undefined, 4) }}</pre>
+    </div>
   </div>
 </template>
 
 <script>
 import Draggable from "./components/Draggable";
-
 export default {
   name: "App",
   components: {
@@ -40,16 +55,10 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 .container {
-  width: 1000px;
+  width: 800px;
+  display: flex;
+  flex-direction: row;
 }
 body {
   display: flex;
@@ -57,20 +66,27 @@ body {
   justify-content: center;
 }
 .draggable-item {
-  color: darkslategray;
+  display: flex;
+  justify-content: center;
   background-color: lightblue;
   box-shadow: 0px 2px 5px #aaa;
   margin: 1%;
   padding: 1%;
-  display: flex;
-  justify-content: center;
 }
 .drop-zone {
   display: flex;
   flex-direction: column;
   box-shadow: 0px 3px 5px #aaa;
   margin: 30px;
-  padding: 5px;
-  min-height: 100px;
+  padding: 10px;
+  width: 400px;
+  height: 200px;
+}
+pre {
+  background-color: #eee;
+  margin: 30px;
+  padding: 10px;
+  width: 400px;
+  min-height: 200px;
 }
 </style>
