@@ -95,7 +95,6 @@ const useDraggableItem = ({ item, position, dropZoneId }, context) => {
   };
 
   const itemDragOver = throttle(e => {
-    console.log(e.target);
     if (item.value.id === draggingItem.value.id) {
       return;
     }
