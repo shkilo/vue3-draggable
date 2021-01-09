@@ -1,47 +1,64 @@
 import { ref, onMounted, onUpdated, watch } from "vue";
+import throttle from "../utils//throttle";
 
-let dragging = ref({});
-let currentDropZoneId = ref(null);
-
-const removeAndInsertDragging = (items, position) => {
+const changePosition = (itemToChange, items, position) => {
   const newItems = items.filter(item => {
-    return item.id !== dragging.value.id;
+    return item.id !== itemToChange.id;
   });
-  newItems.splice(position, 0, { ...dragging.value });
+  newItems.splice(position, 0, { ...itemToChange });
   return newItems;
 };
+
+let draggingItem = ref({});
+let currentDropZoneId = ref(null);
+let transitioning = false;
 
 const useDraggableContainer = ({ initialItems, dropZoneId }, context) => {
   const items = ref(initialItems.value);
 
-  const onItemDragOver = ({ position }) => {
-    items.value = removeAndInsertDragging(items.value, position);
-  };
-
-  const containerDragOver = () => {
-    if (dropZoneId.value === currentDropZoneId.value) {
-      return;
-    }
-    currentDropZoneId.value = dropZoneId.value;
-    items.value = removeAndInsertDragging(items.value, -1);
-  };
-
-  watch(currentDropZoneId, () => {
-    if (currentDropZoneId.value === dropZoneId.value) {
-      return;
-    }
-    items.value = items.value.filter(item => item.id !== dragging.value.id);
-  });
-
   // update model when dropped
-  watch(dragging, () => {
-    if (dragging.value.id) {
+  watch(draggingItem, () => {
+    if (draggingItem.value.id) {
       return;
     }
     context.emit("update:modelValue", items.value);
   });
 
+  watch(currentDropZoneId, () => {
+    if (currentDropZoneId.value === dropZoneId.value) {
+      return;
+    }
+    items.value = items.value.filter(item => item.id !== draggingItem.value.id);
+  });
+
+  const onItemDragOver = ({ position }) => {
+    if (transitioning || draggingItem.value == {}) {
+      return;
+    }
+    items.value = changePosition(draggingItem.value, items.value, position);
+  };
+
+  const containerDragOver = () => {
+    if (
+      transitioning ||
+      draggingItem.value == {} ||
+      dropZoneId.value === currentDropZoneId.value
+    ) {
+      return;
+    }
+
+    if (items.value.length > 0) {
+      return;
+    }
+
+    currentDropZoneId.value = dropZoneId.value;
+    items.value = [draggingItem.value];
+  };
+
+  const style = "background-color: red";
+
   return {
+    style,
     localItems: items,
     onItemDragOver,
     containerDragOver
@@ -50,10 +67,10 @@ const useDraggableContainer = ({ initialItems, dropZoneId }, context) => {
 
 const useDraggableItem = ({ item, position, dropZoneId }, context) => {
   const draggable = ref(null);
-  const isDragging = ref(item.value.id === dragging.value.id ? true : false);
+  const isDragging = ref(
+    item.value.id === draggingItem.value.id ? true : false
+  );
   const middleY = ref(null);
-
-  let transitioning = false;
 
   onMounted(async () => {
     setTimeout(() => {
@@ -68,18 +85,23 @@ const useDraggableItem = ({ item, position, dropZoneId }, context) => {
   });
 
   const itemDragStart = () => {
-    dragging.value = item.value;
+    draggingItem.value = item.value;
     currentDropZoneId.value = dropZoneId.value;
     isDragging.value = true;
   };
 
   const itemDragEnd = () => {
-    dragging.value = {};
+    draggingItem.value = {};
   };
 
-  const itemDragOver = e => {
-    if (transitioning || item.value.id === dragging.value.id) {
+  const itemDragOver = throttle(e => {
+    console.log(e.target);
+    if (item.value.id === draggingItem.value.id) {
       return;
+    }
+
+    if (currentDropZoneId.value !== dropZoneId.value) {
+      currentDropZoneId.value = dropZoneId.value;
     }
 
     const offset = middleY.value - e.clientY;
@@ -87,7 +109,7 @@ const useDraggableItem = ({ item, position, dropZoneId }, context) => {
     context.emit("itemDragOver", {
       position: offset > 0 ? position.value : position.value + 1
     });
-  };
+  }, 50);
 
   const transitionStart = () => {
     transitioning = true;
@@ -97,21 +119,21 @@ const useDraggableItem = ({ item, position, dropZoneId }, context) => {
     transitioning = false;
   };
 
-  watch(dragging, () => {
-    if (dragging.value.id) {
+  watch(draggingItem, () => {
+    if (draggingItem.value.id) {
       return;
     }
     isDragging.value = false;
   });
 
   return {
+    draggable,
+    isDragging,
     itemDragStart,
     itemDragOver,
     itemDragEnd,
     transitionStart,
-    transitionEnd,
-    draggable,
-    isDragging
+    transitionEnd
   };
 };
 

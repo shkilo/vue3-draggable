@@ -28,23 +28,23 @@ export default {
   setup(props, context) {
     const { item, position, dropZoneId } = toRefs(props);
     const {
+      draggable,
       isDragging,
       itemDragStart,
       itemDragOver,
       itemDragEnd,
       transitionStart,
-      transitionEnd,
-      draggable
+      transitionEnd
     } = useDraggableItem({ item, position, dropZoneId }, context);
 
     return {
+      draggable,
       isDragging,
       itemDragStart,
       itemDragOver,
       itemDragEnd,
       transitionStart,
-      transitionEnd,
-      draggable
+      transitionEnd
     };
   }
 };
