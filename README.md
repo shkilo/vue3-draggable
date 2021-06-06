@@ -22,6 +22,8 @@ npm i vue3-draggable
 
 ```bash
 git clone https://github.com/shkilo/vue3-draggable.git
+
+npm i
 npm run serve
 ```
 
