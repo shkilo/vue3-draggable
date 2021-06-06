@@ -3,7 +3,6 @@
     <div class="left">
       <draggable
         v-model="items1"
-        dropZoneId="1"
         transition="100"
         class="drop-zone"
       >
@@ -20,7 +19,6 @@
     <div class="right">
       <draggable
         v-model="items2"
-        dropZoneId="2"
         transition="100"
         class="drop-zone"
       >
@@ -37,9 +35,9 @@
 </template>
 
 <script>
-import Draggable from "./components/Draggable";
+import Draggable from "./components/DraggableContainer";
 export default {
-  name: "App",
+  name: "Sample",
   components: {
     Draggable
   },
