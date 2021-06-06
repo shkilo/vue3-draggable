@@ -1,6 +1,6 @@
 {
   "name": "vue3-draggable",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "private": false,
   "description": "simple drag&drop component for vue 3.x",
   "author": {
