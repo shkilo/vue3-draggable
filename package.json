@@ -13,9 +13,9 @@
     "lint": "vue-cli-service lint",
     "build-library": "vue-cli-service build --target lib --name vue3-draggable ./src/index.js"
   },
-  "main": "dist/vue3-draggable.common.js",
+  "main": "dist/vue3-draggable.umd.min.js",
   "files": [
-    "dist/*"
+    "dist/*.umd.min.*"
   ],
   "dependencies": {
     "vue-class-component": "^8.0.0-0"
