@@ -1,11 +1,11 @@
 <template>
-  <div @dragover.prevent="containerDragOver">
-    <transition-group name="item-list">
+  <div @dragover.prevent.stop="onDragOver">
+    <transition-group name="draggable-item-list">
       <draggable-item
-        v-for="(item, index) in localItems"
+        v-for="(item, index) in items"
         :key="item.id"
         :item="item"
-        :dropZoneId="dropZoneId"
+        :containerId="id"
         :position="index"
         @itemDragOver="onItemDragOver"
       >
@@ -27,28 +27,21 @@ export default {
   },
   props: {
     modelValue: Array,
-    dropZoneId: String,
     transition: {
       default: "0",
       type: String
     }
   },
   setup(props, context) {
-    const { modelValue, dropZoneId } = toRefs(props);
-
+    const { modelValue } = toRefs(props);
     const {
-      localItems,
+      id,
+      items,
+      onDragOver,
       onItemDragOver,
-      containerDragOver
-    } = useDraggableContainer(
-      {
-        initialItems: modelValue,
-        dropZoneId
-      },
-      context
-    );
+    } = useDraggableContainer(modelValue, context);
 
-    return { localItems, onItemDragOver, containerDragOver };
+    return { id, items, onDragOver, onItemDragOver };
   },
   computed: {
     transitionStyle() {
@@ -59,7 +52,7 @@ export default {
 </script>
 
 <style scoped>
-.item-list-move {
+.draggable-item-list-move {
   transition: v-bind(transitionStyle);
 }
 </style>
