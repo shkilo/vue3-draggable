@@ -3,11 +3,10 @@
     draggable="true"
     @transitionStart="transitionStart"
     @transitionEnd="transitionEnd"
-    @dragover.prevent="itemDragOver"
-    @dragstart="itemDragStart"
-    @dragend="itemDragEnd"
-    @dragleave.prevent
-    ref="draggable"
+    @dragover.prevent.stop="onDragOver"
+    @dragstart.stop="onDragStart"
+    @dragend.stop="onDragEnd"
+    ref="draggableItemEl"
     :class="{ isDragging }"
   >
     <slot></slot>
@@ -23,26 +22,26 @@ export default {
   props: {
     item: Object,
     position: Number,
-    dropZoneId: String
+    containerId: Number
   },
   setup(props, context) {
-    const { item, position, dropZoneId } = toRefs(props);
+    const { item, position, containerId } = toRefs(props);
     const {
-      draggable,
+      draggableItemEl,
       isDragging,
-      itemDragStart,
-      itemDragOver,
-      itemDragEnd,
+      onDragStart,
+      onDragOver,
+      onDragEnd,
       transitionStart,
       transitionEnd
-    } = useDraggableItem({ item, position, dropZoneId }, context);
+    } = useDraggableItem(item, position, containerId, context);
 
     return {
-      draggable,
+      draggableItemEl,
       isDragging,
-      itemDragStart,
-      itemDragOver,
-      itemDragEnd,
+      onDragStart,
+      onDragOver,
+      onDragEnd,
       transitionStart,
       transitionEnd
     };

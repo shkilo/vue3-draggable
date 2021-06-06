@@ -1,16 +1,14 @@
-const throttle = (callback, wait) => {
+export const throttle = (callback: Function, limit: number) => {
   let waiting = false;
-  return e => {
+  return (...args: any[]) => {
     if (waiting) {
       return;
     }
-    callback(e);
+    callback(...args);
     waiting = true;
     setTimeout(() => {
       waiting = false;
-    }, wait);
+    }, limit);
     return;
   };
 };
-
-export default throttle;
