@@ -8,8 +8,9 @@
         :containerId="id"
         :position="index"
         @itemDragOver="onItemDragOver"
+        @dragenter.prevent
       >
-        <slot name="item" :item="item"></slot>
+        <slot name="item" :item="item.data"></slot>
       </draggable-item>
     </transition-group>
   </div>

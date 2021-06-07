@@ -1,4 +1,4 @@
 export interface DraggableItem {
-  id: number | string;
-  [x: string]: any;
+  id: number;
+  data: object;
 }

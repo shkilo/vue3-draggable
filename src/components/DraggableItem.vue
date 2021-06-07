@@ -6,6 +6,7 @@
     @dragover.prevent.stop="onDragOver"
     @dragstart.stop="onDragStart"
     @dragend.stop="onDragEnd"
+    @dragenter.prevent
     ref="draggableItemEl"
     :class="{ isDragging }"
   >
