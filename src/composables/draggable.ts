@@ -1,27 +1,30 @@
 import { ref, onMounted, onUpdated, watch, SetupContext, Ref } from "vue";
-import { notDragging } from "../constants";
 import { DraggableItem } from "../types/draggable-item.interface";
 import { changeArrayOrder } from "../utils/change-order";
 import { getIdGenerator } from "../utils/id-generator";
 import { throttle } from "../utils/throttle";
+import { toOriginalArray, toDraggableItems } from "../utils/to-draggable-items";
 
-let itemCurrentlyDragging = ref<DraggableItem>({ id: notDragging });
+let itemCurrentlyDragging = ref<DraggableItem>(null);
 let containerIdCurrentlyDraggedOver = ref<number>(null);
 let transitioning = false;
 const containerIdGenerator = getIdGenerator();
 
 const useDraggableContainer = (
-  originalItems: Ref<Array<DraggableItem>>,
+  originalItems: Ref<Array<any>>,
   context: SetupContext
 ) => {
-  const items = ref(originalItems.value);
   const id = containerIdGenerator();
+  const items = ref<Array<DraggableItem>>(
+    toDraggableItems(originalItems.value)
+  );
 
   // update v-model when dropped
   watch(itemCurrentlyDragging, () => {
-    if (itemCurrentlyDragging.value.id === notDragging) {
-      context.emit("update:modelValue", items.value);
+    if (itemCurrentlyDragging.value) {
+      return;
     }
+    context.emit("update:modelValue", toOriginalArray(items.value));
   });
 
   // case when an item is being dragged to another container
@@ -38,7 +41,7 @@ const useDraggableContainer = (
   const onDragOver = () => {
     if (
       transitioning ||
-      itemCurrentlyDragging.value.id === notDragging ||
+      !itemCurrentlyDragging.value ||
       containerIdCurrentlyDraggedOver.value === id
     ) {
       return;
@@ -54,7 +57,7 @@ const useDraggableContainer = (
 
   // handle event emitted from draggableItem
   const onItemDragOver = ({ position }: { position: number }) => {
-    if (transitioning || itemCurrentlyDragging.value.id === notDragging) {
+    if (transitioning || !itemCurrentlyDragging.value) {
       return;
     }
     items.value = changeArrayOrder(
@@ -73,14 +76,14 @@ const useDraggableContainer = (
 };
 
 const useDraggableItem = (
-  item: Ref<DraggableItem>,
+  item: Ref<any>,
   position: Ref<number>,
   containerId: Ref<number>,
   context: SetupContext
 ) => {
   const draggableItemEl = ref(null);
   const isDragging = ref(
-    item.value.id === itemCurrentlyDragging.value.id ? true : false
+    item.value.id === itemCurrentlyDragging.value?.id ? true : false
   );
   const middleY = ref(null);
 
@@ -101,7 +104,7 @@ const useDraggableItem = (
   };
 
   const onDragEnd = () => {
-    itemCurrentlyDragging.value = { id: notDragging };
+    itemCurrentlyDragging.value = null;
   };
 
   const onDragOver = throttle((e: DragEvent) => {
@@ -129,7 +132,7 @@ const useDraggableItem = (
   };
 
   watch(itemCurrentlyDragging, () => {
-    if (itemCurrentlyDragging.value.id !== notDragging) {
+    if (itemCurrentlyDragging.value) {
       return;
     }
     isDragging.value = false;

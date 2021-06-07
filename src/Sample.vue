@@ -45,7 +45,7 @@ export default {
     return {
       items1: Array(5)
         .fill({})
-        .map((_, index) => ({ id: index + 1, title: `Item ${index + 1}` })),
+        .map((_, index) => ({ title: `Item ${index + 1}` })),
       items2: []
     };
   }

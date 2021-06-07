@@ -44,10 +44,10 @@ export default {
 template:
 
 ```vue
-<draggable v-model="items" dropZoneId="1" class="drop-zone">
+<draggable v-model="items">
     <template v-slot:item="{item}">
         <!-- example -->
-        <div class="draggable-item">
+        <div>
             {{item.title}}
         </div>
         <!-- or your own template -->
@@ -59,7 +59,7 @@ This componet is implemented based on [v-slot](https://v3.vuejs.org/guide/compon
 
 ### Props
 
-| Name       | Required | Type   | Description                                                                                                                                 |
-| :--------- | :------- | :----- | :------------------------------------------------------------------------------------------------------------------------------------------ |
-| modelValue | REQUIRED | ARRAY  | v-model value, items to be bound <br> **each item in array should have 'id' property** <br> ex) [{id:1, title:item1}, {id:2, title: item2}] |
-| transition | OPTIONAL | STRING | transition delay in ms                                                                                                                      |
+| Name       | Required | Type   | Description                      |
+| :--------- | :------- | :----- | :------------------------------- |
+| modelValue | REQUIRED | ARRAY  | v-model value, items to be bound |
+| transition | OPTIONAL | STRING | transition delay in ms           |
