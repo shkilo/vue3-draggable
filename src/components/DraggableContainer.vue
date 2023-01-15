@@ -17,9 +17,10 @@
 </template>
 
 <script>
-import { toRefs } from "vue";
+import {toRefs, watch} from "vue";
 import DraggableItem from "./DraggableItem";
 import { useDraggableContainer } from "../composables/draggable";
+import { toOriginalArray, toDraggableItems } from "../utils/to-draggable-items";
 
 export default {
   name: "Draggable",
@@ -41,6 +42,12 @@ export default {
       onDragOver,
       onItemDragOver,
     } = useDraggableContainer(modelValue, context);
+
+
+    watch(props, (newValue) => {
+      items.value = toDraggableItems(newValue.modelValue);
+      context.emit("update:modelValue", toOriginalArray(items.value));
+    });
 
     return { id, items, onDragOver, onItemDragOver };
   },
